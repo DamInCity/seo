@@ -1,36 +1,55 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 
 export const LenisProvider = ({ children }: { children: React.ReactNode }) => {
     const lenisRef = useRef<Lenis | null>(null);
+    const [error, setError] = useState<boolean>(false);
 
     useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            orientation: 'vertical',
-            gestureOrientation: 'vertical',
-            smoothWheel: true,
-            touchMultiplier: 2,
-        });
+        try {
+            // Check if we're in a browser environment and if the document is ready
+            if (typeof window === 'undefined' || !document.documentElement) {
+                return;
+            }
 
-        lenisRef.current = lenis;
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                touchMultiplier: 2,
+            });
 
-        function raf(time: number) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+            lenisRef.current = lenis;
+
+            function raf(time: number) {
+                if (lenisRef.current) {
+                    lenisRef.current.raf(time);
+                }
+                requestAnimationFrame(raf);
+            }
+
+            const frameId = requestAnimationFrame(raf);
+
+            return () => {
+                cancelAnimationFrame(frameId);
+                if (lenisRef.current) {
+                    lenisRef.current.destroy();
+                    lenisRef.current = null;
+                }
+            };
+        } catch (err) {
+            console.error('Lenis initialization error:', err);
+            setError(true);
+            // Gracefully fallback without smooth scrolling
+            return;
         }
-
-        requestAnimationFrame(raf);
-
-        // Integrate with native scroll for things like scroll progress to work seamlessly
-        // though Lenishijacks interactions, the native scroll event still fires on window usually
-        // or we can use lenis.on('scroll', ...) if needed for custom trackers.
-
-        return () => {
-            lenis.destroy();
-        };
     }, []);
+
+    if (error) {
+        console.warn('Lenis smooth scrolling disabled due to initialization error');
+    }
 
     return <>{children}</>;
 };

@@ -1,0 +1,4 @@
+# Cloudflare Pages / Netlify-style redirects
+# Fallback to index.html for client-side routing or direct access to any path
+# (ensures the static SPA loads on any URL, useful for custom paths or error recovery)
+ /*    /index.html   200

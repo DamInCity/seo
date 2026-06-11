@@ -54,9 +54,42 @@ export const CTASection = () => {
                                 </p>
                                 <div className="flex items-center gap-4 text-sm" style={{ color: 'var(--text-muted)' }}>
                                     <div className="flex -space-x-2">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#4EE1A0] to-[#54C4FF] border-2" style={{ borderColor: 'var(--bg-main)' }} />
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#54C4FF] to-[#FF4D67] border-2" style={{ borderColor: 'var(--bg-main)' }} />
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FF4D67] to-[#4EE1A0] border-2" style={{ borderColor: 'var(--bg-main)' }} />
+                                        {/* Acme Analytics */}
+                                        <div
+                                            className="w-8 h-8 rounded-full border-2 overflow-hidden"
+                                            style={{ borderColor: 'var(--bg-main)' }}
+                                            aria-hidden="true"
+                                        >
+                                            <img
+                                                src="/images/logos/acme-analytics.jpg"
+                                                alt=""
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        {/* Lumina Finance */}
+                                        <div
+                                            className="w-8 h-8 rounded-full border-2 overflow-hidden"
+                                            style={{ borderColor: 'var(--bg-main)' }}
+                                            aria-hidden="true"
+                                        >
+                                            <img
+                                                src="/images/logos/lumina-finance.jpg"
+                                                alt=""
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        {/* Velvet Space */}
+                                        <div
+                                            className="w-8 h-8 rounded-full border-2 overflow-hidden"
+                                            style={{ borderColor: 'var(--bg-main)' }}
+                                            aria-hidden="true"
+                                        >
+                                            <img
+                                                src="/images/logos/velvet-space.jpg"
+                                                alt=""
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
                                     </div>
                                     <span>Join 40+ brands growing today</span>
                                 </div>

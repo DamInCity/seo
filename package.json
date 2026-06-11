@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:static": "npm run build",
+    "preview:static": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "cf:deploy": "npm run build && npx wrangler pages deploy dist",
+    "cf:preview": "npm run build && npx wrangler pages dev dist"
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.2.5",
