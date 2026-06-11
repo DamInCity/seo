@@ -9,7 +9,7 @@
     "build:static": "npm run build",
     "preview:static": "vite preview",
     "lint": "eslint .",
-    "cf:deploy": "npm run build && npx wrangler pages deploy",
+    "cf:deploy": "npm run build && npx wrangler deploy",
     "cf:preview": "npx wrangler pages dev dist"
   },
   "dependencies": {
